@@ -15,7 +15,7 @@ def find_missing_number(arr):
     return missing
 
 
-# Some test runs to verify
+# Some test to verify
 print("Test Case 1:", find_missing_number([1, 2, 4, 5]))     # Expected: 3
 print("Test Case 2:", find_missing_number([2, 3, 4, 5]))     # Expected: 1
 print("Test Case 3:", find_missing_number([1, 2, 3, 4]))     # Expected: 5
