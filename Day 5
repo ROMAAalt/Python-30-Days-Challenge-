@@ -1,0 +1,29 @@
+# Function to find leaders in an array
+def findLeaders(arr):
+    n = len(arr)
+    leaders = []
+    
+    if n == 0:
+        return leaders
+    
+    # last element is always a leader
+    maxRight = arr[-1]
+    leaders.append(maxRight)
+    
+    # check from right to left
+    for i in range(n-2, -1, -1):
+        if arr[i] > maxRight:
+            leaders.append(arr[i])
+            maxRight = arr[i]
+    
+    # reverse to restore original order
+    leaders.reverse()
+    return leaders
+
+
+# some test runs
+print(findLeaders([16, 17, 4, 3, 5, 2]))     # [17, 5, 2]
+print(findLeaders([1, 2, 3, 4, 0]))          # [4, 0]
+print(findLeaders([7, 10, 4, 10, 6, 5, 2]))  # [10, 6, 5, 2]
+print(findLeaders([5]))                      # [5]
+print(findLeaders([100, 50, 20, 10]))        # [100, 50, 20, 10]
