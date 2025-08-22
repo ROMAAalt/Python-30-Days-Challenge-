@@ -1,0 +1,38 @@
+def reverseWords(s):
+    n = len(s)
+    words = []
+    i = 0
+
+    while i < n:
+        # skip spaces
+        while i < n and s[i] == ' ':
+            i += 1
+        if i >= n:
+            break
+
+        # find end of the word
+        j = i
+        while j < n and s[j] != ' ':
+            j += 1
+
+        # append word to list
+        words.append(s[i:j])
+        i = j
+
+    # reverse words manually
+    left, right = 0, len(words) - 1
+    while left < right:
+        words[left], words[right] = words[right], words[left]
+        left += 1
+        right -= 1
+
+    # join with single space
+    return ' '.join(words)
+
+
+# human-style tests
+print(reverseWords("the sky is blue"))      # "blue is sky the"
+print(reverseWords("  hello world  "))      # "world hello"
+print(reverseWords("a good   example"))     # "example good a"
+print(reverseWords("    "))                 # ""
+print(reverseWords("word"))               # "word"
