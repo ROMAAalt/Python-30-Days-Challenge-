@@ -1,0 +1,25 @@
+def groupAnagrams(strs):
+    if not strs:   # handle empty input case
+        return []
+    
+    groups = {}   # dictionary to store sorted word as key
+    
+    for word in strs:
+        # use sorted word as a key (signature of an anagram group)
+        key = ''.join(sorted(word))
+        
+        if key in groups:
+            groups[key].append(word)
+        else:
+            groups[key] = [word]
+    
+    # return the grouped anagrams
+    return list(groups.values())
+
+
+# quick tests
+print(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+print(groupAnagrams([""]))
+print(groupAnagrams(["a"]))
+print(groupAnagrams(["abc", "bca", "cab", "xyz", "zyx", "yxz"]))
+print(groupAnagrams(["abc", "def", "ghi"]))
