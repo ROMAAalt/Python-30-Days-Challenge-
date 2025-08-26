@@ -1,0 +1,28 @@
+def isValid(s):
+    # stack to keep track of opening brackets
+    stack = []
+    # mapping for closing to opening
+    mapping = {')': '(', ']': '[', '}': '{'}
+
+    # go through each character
+    for c in s:
+        if c in mapping.values():   # if it's an opening bracket
+            stack.append(c)
+        elif c in mapping:          # if it's a closing bracket
+            if not stack or stack[-1] != mapping[c]:
+                return False
+            stack.pop()
+        else:
+            # shouldn't happen since input is only brackets
+            return False
+    
+    # valid if nothing is left open
+    return len(stack) == 0
+
+
+# sample runs (like a student testing quickly)
+print(isValid("()"))       # True
+print(isValid("([)]"))     # False
+print(isValid("[{()}]"))   # True
+print(isValid(""))         # True
+print(isValid("{[}"))      # def
