@@ -1,0 +1,38 @@
+def longestPalindrome(s):
+    n = len(s)
+    if n <= 1:
+        return s
+    
+    start = 0
+    max_len = 1
+
+    # helper: expand from center
+    def expand(l, r):
+        while l >= 0 and r < n and s[l] == s[r]:
+            l -= 1
+            r += 1
+        # after breaking loop, indices went 1 step too far
+        return l+1, r-1
+
+    for i in range(n):
+        # odd length palindrome
+        l1, r1 = expand(i, i)
+        if r1 - l1 + 1 > max_len:
+            start = l1
+            max_len = r1 - l1 + 1
+
+        # even length palindrome
+        l2, r2 = expand(i, i+1)
+        if r2 - l2 + 1 > max_len:
+            start = l2
+            max_len = r2 - l2 + 1
+
+    return s[start:start+max_len]
+
+
+# some quick tests
+print(longestPalindrome("babad"))   # "bab" or "aba"
+print(longestPalindrome("cbbd"))    # "bb"
+print(longestPalindrome("a"))       # "a"
+print(longestPalindrome("aaaa"))    # "aaaa"
+print(longestPalindrome("abc"))     # "a"
