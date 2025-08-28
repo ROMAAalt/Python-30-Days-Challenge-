@@ -1,0 +1,33 @@
+def countSubstringsWithKDistinct(s, k):
+    n = len(s)
+    if n == 0 or k == 0:
+        return 0
+
+    # helper: count substrings with at most k distinct chars
+    def atMostK(k):
+        left = 0
+        freq = {}
+        total = 0
+        for right in range(n):
+            ch = s[right]
+            freq[ch] = freq.get(ch, 0) + 1
+
+            while len(freq) > k:
+                freq[s[left]] -= 1
+                if freq[s[left]] == 0:
+                    del freq[s[left]]
+                left += 1
+
+            total += (right - left + 1)
+        return total
+
+    # exactly k = atMost(k) - atMost(k-1)
+    return atMostK(k) - atMostK(k - 1)
+
+
+# quick test runs
+print(countSubstringsWithKDistinct("pqpqs", 2))       # 7
+print(countSubstringsWithKDistinct("aabacbebebe", 3)) # 10
+print(countSubstringsWithKDistinct("a", 1))           # 1
+print(countSubstringsWithKDistinct("abc", 3))         # 1
+print(countSubstringsWithKDistinct("abc", 2))         # 2
