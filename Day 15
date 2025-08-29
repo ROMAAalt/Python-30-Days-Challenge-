@@ -1,0 +1,25 @@
+def lengthOfLongestSubstring(s):
+    n = len(s)
+    if n == 0:
+        return 0
+
+    seen = set()
+    left = 0
+    max_len = 0
+
+    for right in range(n):
+        while s[right] in seen:
+            seen.remove(s[left])
+            left += 1
+        seen.add(s[right])
+        max_len = max(max_len, right - left + 1)
+
+    return max_len
+
+
+# quick tests
+print(lengthOfLongestSubstring("abcabcbb"))  # 3 ("abc")
+print(lengthOfLongestSubstring("bbbbb"))     # 1 ("b")
+print(lengthOfLongestSubstring("pwwkew"))    # 3 ("wke")
+print(lengthOfLongestSubstring(""))          # 0
+print(lengthOfLongestSubstring("abcdef"))    # 6
