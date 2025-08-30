@@ -1,0 +1,20 @@
+def gcd(a, b):
+    # Euclidean algorithm (iterative)
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def lcm(n, m):
+    # avoid overflow by dividing before multiplying
+    return n // gcd(n, m) * m
+
+if __name__ == "__main__":
+    # read inputs
+    try:
+        n, m = map(int, input().split())
+    except:
+        # fallback if given in assignment format
+        n = int(input("Enter N: "))
+        m = int(input("Enter M: "))
+    
+    print(lcm(n, m))
