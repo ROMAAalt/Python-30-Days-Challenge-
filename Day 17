@@ -1,0 +1,30 @@
+def prime_factors(n):
+    factors = []
+    
+    # check for number of 2s
+    while n % 2 == 0:
+        factors.append(2)
+        n //= 2
+    
+    # check odd numbers starting from 3
+    f = 3
+    while f * f <= n:
+        while n % f == 0:
+            factors.append(f)
+            n //= f
+        f += 2   # skip even numbers
+    
+    # if n is still > 1, it must be prime
+    if n > 1:
+        factors.append(n)
+    
+    return factors
+
+if __name__ == "__main__":
+    try:
+        N = int(input().strip())
+    except:
+        N = int(input("Enter N: "))
+    
+    result = prime_factors(N)
+    print(result)
