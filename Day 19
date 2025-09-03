@@ -1,0 +1,29 @@
+def eval_postfix(expr):
+    stk = []
+    tokens = expr.strip().split()
+    
+    for tok in tokens:
+        if tok.lstrip('-').isdigit():   # handles negative numbers too
+            stk.append(int(tok))
+        else:
+            b = stk.pop()
+            a = stk.pop()
+            if tok == '+':
+                res = a + b
+            elif tok == '-':
+                res = a - b
+            elif tok == '*':
+                res = a * b
+            elif tok == '/':
+                # integer division truncated toward 0
+                res = int(a / b)
+            stk.append(res)
+    return stk[0] if stk else 0
+
+if __name__ == "__main__":
+    try:
+        expr = input().strip()
+    except:
+        expr = input("Enter postfix expression: ")
+    
+    print(eval_postfix(expr))
