@@ -1,0 +1,28 @@
+def insert_sorted(stk, val):
+    # put val in the right position in the sorted stack
+    if not stk or val >= stk[-1]:
+        stk.append(val)
+    else:
+        temp = stk.pop()
+        insert_sorted(stk, val)
+        stk.append(temp)
+
+def sort_stack(stk):
+    if stk:
+        temp = stk.pop()
+        sort_stack(stk)
+        insert_sorted(stk, temp)
+
+if __name__ == "__main__":
+    try:
+        raw = input().strip()
+        # expecting input like: 3 1 4 2
+        if raw:
+            stk = list(map(int, raw.split()))
+        else:
+            stk = []
+    except:
+        stk = []
+
+    sort_stack(stk)
+    print(stk)
