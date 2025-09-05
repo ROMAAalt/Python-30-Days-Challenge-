@@ -1,0 +1,28 @@
+def insert_bottom(stk, val):
+    # insert element at the bottom of the stack
+    if not stk:
+        stk.append(val)
+    else:
+        temp = stk.pop()
+        insert_bottom(stk, val)
+        stk.append(temp)
+
+def reverse_stack(stk):
+    if stk:
+        temp = stk.pop()
+        reverse_stack(stk)
+        insert_bottom(stk, temp)
+
+if __name__ == "__main__":
+    try:
+        raw = input().strip()
+        # input like: 1 2 3 4
+        if raw:
+            stk = list(map(int, raw.split()))
+        else:
+            stk = []
+    except:
+        stk = []
+
+    reverse_stack(stk)
+    print(stk)
