@@ -1,0 +1,22 @@
+def first_k_times(arr, k):
+    freq = {}
+    for num in arr:
+        freq[num] = freq.get(num, 0) + 1
+    
+    for num in arr:
+        if freq[num] == k:
+            return num
+    return -1
+
+if __name__ == "__main__":
+    try:
+        raw = input().strip()
+        if raw:
+            arr = list(map(int, raw.split()))
+        else:
+            arr = []
+        k = int(input().strip())
+    except:
+        arr, k = [], 0
+    
+    print(first_k_times(arr, k))
