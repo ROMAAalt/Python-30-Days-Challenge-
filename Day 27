@@ -1,0 +1,35 @@
+from collections import deque, defaultdict
+
+def shortest_path(v, edges, start, end):
+    # build adjacency list
+    graph = defaultdict(list)
+    for u, w in edges:
+        graph[u].append(w)
+        graph[w].append(u)   # undirected graph
+
+    # BFS setup
+    visited = [False] * v
+    dist = [-1] * v   # -1 means not reachable
+    q = deque()
+
+    visited[start] = True
+    dist[start] = 0
+    q.append(start)
+
+    while q:
+        node = q.popleft()
+        for nei in graph[node]:
+            if not visited[nei]:
+                visited[nei] = True
+                dist[nei] = dist[node] + 1
+                q.append(nei)
+
+    return dist[end]
+
+
+# Example usage
+if __name__ == "__main__":
+    V = 5
+    edges = [[0, 1], [0, 2], [1, 3], [2, 3], [3, 4]]
+    start, end = 0, 4
+    print(shortest_path(V, edges, start, end))  # Expected: 3
